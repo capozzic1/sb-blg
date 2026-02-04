@@ -22,7 +22,6 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
         return authConfig.getAuthenticationManager();
@@ -40,6 +39,8 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/api/posts/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT, "/api/posts/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/api/posts/**").hasRole("ADMIN")
+                        .requestMatchers("/actuator/health").permitAll()
+
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
