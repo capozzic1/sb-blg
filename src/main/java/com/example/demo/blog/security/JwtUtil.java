@@ -26,6 +26,10 @@ public class JwtUtil {
         this.expirationMs = expirationMs;
     }
 
+    public long getExpirationMs() {
+        return expirationMs;
+    }
+
     public String generateToken(String username) {
         return generateToken(username, Set.of());
     }

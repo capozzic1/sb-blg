@@ -14,6 +14,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.Arrays;
+import java.util.List;
+
 @Configuration
 @EnableMethodSecurity
 public class SecurityConfig {
@@ -34,7 +41,12 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/**").permitAll()
+                        // permit only specific auth endpoints
+                        .requestMatchers("/api/auth/login").permitAll()
+                        .requestMatchers("/api/auth/logout").permitAll()
+                        // allow /me to reach the controller; controller returns 401 when unauthenticated
+                        .requestMatchers("/api/auth/me").permitAll()
+
                         .requestMatchers(HttpMethod.GET, "/api/posts/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/posts/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT, "/api/posts/**").hasRole("ADMIN")
@@ -45,5 +57,18 @@ public class SecurityConfig {
                 )
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
+    }
+
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration config = new CorsConfiguration();
+        // Allow any origin pattern (supports wildcard) — adjust for production to specific origins
+        config.setAllowedOriginPatterns(List.of("*"));
+        config.setAllowedMethods(Arrays.asList("GET","POST","PUT","DELETE","OPTIONS"));
+        config.setAllowedHeaders(List.of("*"));
+        config.setAllowCredentials(true); // allow browser to send cookies
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", config);
+        return source;
     }
 }
