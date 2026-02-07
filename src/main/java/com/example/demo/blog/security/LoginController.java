@@ -46,7 +46,7 @@ public class LoginController {
         long maxAgeSeconds = jwtUtil.getExpirationMs() / 1000L;
         ResponseCookie cookie = ResponseCookie.from("JWT", token)
                 .httpOnly(true)
-                .secure(false) // set to true in production (requires https)
+                .secure(true) // set to true in production (requires https)
                 .path("/")
                 .maxAge(maxAgeSeconds)
                 .sameSite("Lax")
