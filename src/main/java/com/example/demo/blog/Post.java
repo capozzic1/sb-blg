@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
+import lombok.AccessLevel;
 
 @Entity
 @Table(name = "posts")
@@ -29,7 +30,14 @@ public class Post {
     @Column(nullable = false)
     private String author;
 
-    @Column(nullable = false)
-    private LocalDateTime createdAt = LocalDateTime.now();
-}
+    @Column(nullable = false, updatable = false)
+    @Setter(AccessLevel.NONE)
+    private LocalDateTime createdAt;
 
+    @PrePersist
+    protected void onCreate() {
+        if (this.createdAt == null) {
+            this.createdAt = LocalDateTime.now();
+        }
+    }
+}

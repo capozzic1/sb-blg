@@ -15,9 +15,7 @@ public class PostMapper {
         p.setTitle(dto.getTitle());
         p.setContent(dto.getContent());
         p.setAuthor(dto.getAuthor());
-        // createdAt is set in entity constructor if null
-        if (dto.getCreatedAt() != null) p.setCreatedAt(dto.getCreatedAt());
+        // Do NOT copy createdAt from incoming DTO — createdAt is managed by the backend
         return p;
     }
 }
-
