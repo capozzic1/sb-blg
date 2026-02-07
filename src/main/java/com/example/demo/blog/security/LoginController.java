@@ -61,7 +61,7 @@ public class LoginController {
     public ResponseEntity<?> logout() {
         ResponseCookie cookie = ResponseCookie.from("JWT", "")
                 .httpOnly(true)
-                .secure(false)
+                .secure(true)
                 .path("/")
                 .maxAge(0)
                 .sameSite("Lax")
