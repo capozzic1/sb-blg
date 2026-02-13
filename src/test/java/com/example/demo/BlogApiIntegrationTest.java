@@ -1,6 +1,6 @@
 package com.example.demo;
 
-import com.example.demo.blog.dto.PostDto;
+import com.example.demo.blog.post.PostDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;

@@ -1,6 +1,4 @@
-package com.example.demo.blog;
-
-import com.example.demo.blog.dto.PostDto;
+package com.example.demo.blog.post;
 
 public class PostMapper {
 

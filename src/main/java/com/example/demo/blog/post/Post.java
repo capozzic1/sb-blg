@@ -1,4 +1,4 @@
-package com.example.demo.blog;
+package com.example.demo.blog.post;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;

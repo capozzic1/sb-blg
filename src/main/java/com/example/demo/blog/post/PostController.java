@@ -1,6 +1,5 @@
-package com.example.demo.blog;
+package com.example.demo.blog.post;
 
-import com.example.demo.blog.dto.PostDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;

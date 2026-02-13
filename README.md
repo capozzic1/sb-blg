@@ -17,5 +17,10 @@ Tech stack
 - MySQL database 
 
 
+mvn "-Dspring-boot.run.profiles=local" "-Dmaven.test.skip=true" spring-boot:run
+
+debugger
+mvn spring-boot:run "-Dspring-boot.run.jvmArguments='-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005'"
+
 
 

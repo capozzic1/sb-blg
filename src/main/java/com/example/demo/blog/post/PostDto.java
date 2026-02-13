@@ -1,4 +1,4 @@
-package com.example.demo.blog.dto;
+package com.example.demo.blog.post;
 
 import java.time.LocalDateTime;
 

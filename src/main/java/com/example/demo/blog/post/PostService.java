@@ -1,6 +1,5 @@
-package com.example.demo.blog;
+package com.example.demo.blog.post;
 
-import com.example.demo.blog.dto.PostDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
