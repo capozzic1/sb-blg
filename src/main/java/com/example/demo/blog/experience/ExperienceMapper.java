@@ -7,7 +7,8 @@ public class ExperienceMapper {
                 experience.getId(),
                 experience.getCompany(),
                 experience.getPosition(),
-                experience.getYears(),
+                experience.getStartYear(),
+                experience.getEndYear(),
                 experience.getCreatedAt()
         );
     }
@@ -16,7 +17,8 @@ public class ExperienceMapper {
         Experience experience = new Experience();
         experience.setCompany(experienceDto.getCompany());
         experience.setPosition(experienceDto.getPosition());
-        experience.setYears(experienceDto.getYears());
+        experience.setStartYear(experienceDto.getStartYear());
+        experience.setEndYear(experienceDto.getEndYear());
 
         return experience;
     }

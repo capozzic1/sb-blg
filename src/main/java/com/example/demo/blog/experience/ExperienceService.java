@@ -2,6 +2,7 @@ package com.example.demo.blog.experience;
 
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 @Service
 public class ExperienceService {
@@ -19,8 +20,10 @@ public class ExperienceService {
     }
 
     public List<ExperienceDTO> getAllExperiences() {
+
         return experienceRepository.findAll().stream()
                 .map(ExperienceMapper::toDto)
+                .sorted(Comparator.comparing(ExperienceDTO::getStartYear).reversed())
                 .toList();
     }
 
@@ -35,7 +38,8 @@ public class ExperienceService {
                 .map(existing -> {
                     existing.setCompany(experienceDto.getCompany());
                     existing.setPosition(experienceDto.getPosition());
-                    existing.setYears(experienceDto.getYears());
+                    existing.setStartYear(experienceDto.getStartYear());
+                    existing.setEndYear(experienceDto.getEndYear());
                     Experience updated = experienceRepository.save(existing);
                     return ExperienceMapper.toDto(updated);
                 })

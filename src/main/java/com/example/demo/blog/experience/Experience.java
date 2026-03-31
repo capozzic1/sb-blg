@@ -28,7 +28,10 @@ public class Experience {
     private String position;
 
     @Column(nullable = false)
-    private String years;
+    private Integer startYear;
+
+    @Column(nullable = false)
+    private Integer endYear;
 
     @Column(nullable = false, updatable = false)
     @Setter(AccessLevel.NONE)
